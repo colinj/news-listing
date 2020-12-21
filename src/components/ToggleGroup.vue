@@ -1,5 +1,5 @@
 <template>
-  <div class="toggle-group over">
+  <div class="toggle-group">
     <div class="toggle">
       <input
         v-model="allCategories"
@@ -81,9 +81,13 @@ $overline-height: 0.125rem;
     }
 
     &:checked + label {
-      border-top-color: $checked-color;
       border-bottom-color: $checked-color;
       color: $checked-color;
+
+      @media (min-width: $breakpoint-sm) {
+        border-top-color: $checked-color;
+        border-bottom-color: transparent;
+      }
 
       &::before {
         z-index: -1;
@@ -106,38 +110,29 @@ $overline-height: 0.125rem;
   border-top: $overline-height solid transparent;
   border-bottom: $overline-height solid transparent;
 
-  @media (min-width: $breakpoint-sm) {
-    padding: 0.5rem 0 1rem;
-  }
-
   &::before {
     content: "";
     position: absolute;
     left: 0;
+    bottom: -$overline-height;
     height: $overline-height;
     width: 0;
     background-color: $hover-color;
     transition: 0.15s ease all;
   }
 
+  @media (min-width: $breakpoint-sm) {
+    padding: 0.5rem 0 1rem;
+
+    &::before {
+      top: -$overline-height;
+      bottom: auto;
+    }
+  }
+
   &:hover::before {
     width: 100%;
     transition: 0.3s ease all;
-  }
-}
-.over .overline {
-  border-bottom-color: transparent !important;
-
-  &::before {
-    top: -$overline-height;
-  }
-}
-
-.under .overline {
-  border-top-color: transparent !important;
-
-  &::before {
-    bottom: -$overline-height;
   }
 }
 
