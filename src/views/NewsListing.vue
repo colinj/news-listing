@@ -10,12 +10,26 @@
       </div>
       <div v-else class="news-layout">
         <div
-          v-for="article in filteredArticles"
+          v-for="(article, index) in filteredArticles"
           :key="article.id"
           class="news-item"
         >
           <a :href="article.URL" target="_blank">
-            {{ article.id }} - {{ article.ArticleTitle }}
+            <article-card
+              :class="{ 'card-tight': [1, 2].includes(index % 4) }"
+              :image="article.ThumbnailImage"
+              :alt-text="article.ArticleTitle"
+              :layout="chooseLayout(index)"
+            >
+              <template v-slot:header>{{ article.Subject }}</template>
+              <h2>{{ article.ArticleTitle }}</h2>
+              <p>{{ article.ShortDescription }}</p>
+              <template v-slot:footer>
+                {{ formatDate(article.Date) }}
+                <br />
+                {{ article.Author }}
+              </template>
+            </article-card>
           </a>
         </div>
       </div>
@@ -25,14 +39,17 @@
 
 <script>
 import { getNewsArticles } from "@/api"
-import ToggleGroup from "@/components/ToggleGroup.vue"
+import ToggleGroup from "@/components/ToggleGroup"
+import ArticleCard from "@/components/ArticleCard"
 
 const intersect = (arrayA, arrayB) => arrayA.filter(x => arrayB.includes(x))
+const dateFormatter = new Intl.DateTimeFormat("en-AU", { dateStyle: "long" })
 
 export default {
   name: "NewsListing",
   components: {
-    ToggleGroup
+    ToggleGroup,
+    ArticleCard
   },
   data() {
     return {
@@ -51,6 +68,22 @@ export default {
           this.selectedTags.length === 0 ||
           intersect(x.Tags, this.selectedTags).length > 0
       )
+    }
+  },
+  methods: {
+    chooseLayout(index) {
+      switch (index % 4) {
+        case 0:
+          return "right"
+        case 1:
+        case 2:
+          return "left"
+        default:
+          return null
+      }
+    },
+    formatDate(date) {
+      return dateFormatter.format(new Date(date))
     }
   },
   watch: {
