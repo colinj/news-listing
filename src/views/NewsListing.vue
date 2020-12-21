@@ -9,7 +9,11 @@
         <div>Loading news articles...</div>
       </div>
       <div v-else class="news-layout">
-        <div v-for="article in articles" :key="article.id" class="news-item">
+        <div
+          v-for="article in filteredArticles"
+          :key="article.id"
+          class="news-item"
+        >
           <a :href="article.URL" target="_blank">
             {{ article.id }} - {{ article.ArticleTitle }}
           </a>
@@ -22,6 +26,8 @@
 <script>
 import { getNewsArticles } from "@/api"
 import ToggleGroup from "@/components/ToggleGroup.vue"
+
+const intersect = (arrayA, arrayB) => arrayA.filter(x => arrayB.includes(x))
 
 export default {
   name: "NewsListing",
@@ -38,6 +44,13 @@ export default {
   computed: {
     uniqueTags() {
       return [...new Set(this.articles.flatMap(item => item.Tags))]
+    },
+    filteredArticles() {
+      return this.articles.filter(
+        x =>
+          this.selectedTags.length === 0 ||
+          intersect(x.Tags, this.selectedTags).length > 0
+      )
     }
   },
   async created() {
