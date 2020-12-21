@@ -53,10 +53,23 @@ export default {
       )
     }
   },
+  watch: {
+    async selectedTags(val) {
+      if (this.isLoaded) {
+        const tags = val.join(",")
+        if (tags !== this.$route.query.tags) {
+          await this.$router.push({ query: { tags } })
+        }
+      }
+    }
+  },
   async created() {
     this.isLoaded = false
     try {
       this.articles = (await getNewsArticles()).data
+      this.selectedTags = (this.$route.query.tags?.split(",") ?? [])
+        .map(x => x.trim())
+        .filter(x => this.uniqueTags.includes(x))
       this.isLoaded = true
     } catch (e) {
       console.log(e)
