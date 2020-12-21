@@ -2,8 +2,10 @@
   <div class="section">
     <div class="container">
       <div class="filters">
+        <h1>Filter</h1>
         <toggle-group :tags="uniqueTags" v-model="selectedTags" />
       </div>
+      <hr class="divider" />
       <div v-if="!isLoaded">
         <div>Loading news articles...</div>
       </div>
@@ -13,7 +15,7 @@
           :key="article.id"
           class="news-item"
         >
-          <a :href="article.URL" target="_blank">
+          <a :href="article.URL" target="_blank" rel="nofollow noopener">
             <article-card
               :class="{ 'card-large': [0, 3].includes(index % 4) }"
               :image="article.ThumbnailImage"
@@ -111,11 +113,21 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+h1 {
+  margin-bottom: 1rem;
+  color: #fff;
+  font-size: $font-size-md;
+}
 a:link {
   text-decoration: none;
 }
-.filters {
-  border-bottom: 1px solid white;
-  margin-bottom: 1rem;
+
+.divider {
+  margin: -0.125rem 0 2rem;
+  border: 0;
+
+  @media (min-width: $breakpoint-sm) {
+    border: 1px solid;
+  }
 }
 </style>

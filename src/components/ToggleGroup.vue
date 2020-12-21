@@ -1,5 +1,5 @@
 <template>
-  <div class="toggle-group">
+  <div class="toggle-group over">
     <div class="toggle">
       <input
         v-model="allCategories"
@@ -59,9 +59,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$hover-color: #ccc;
+$hover-color: #dedede;
 $checked-color: #fff;
-$overline-height: 0.25rem;
+$overline-height: 0.125rem;
 
 .toggle-group {
   display: flex;
@@ -70,15 +70,11 @@ $overline-height: 0.25rem;
 
 .toggle {
   display: flex;
-
-  label {
-    padding: 0.5rem;
-    padding-bottom: 1.5rem;
-    border-top: $overline-height solid transparent;
-  }
+  margin-right: 1rem;
 
   input[type="checkbox"] {
     appearance: none;
+    margin: 0;
 
     &:hover + label {
       color: $hover-color;
@@ -86,6 +82,7 @@ $overline-height: 0.25rem;
 
     &:checked + label {
       border-top-color: $checked-color;
+      border-bottom-color: $checked-color;
       color: $checked-color;
 
       &::before {
@@ -97,15 +94,25 @@ $overline-height: 0.25rem;
       background-color: red;
     }
   }
+  &:nth-last-of-type(2) {
+    margin-right: 0.5rem;
+  }
 }
 
 .overline {
   position: relative;
+  margin: 0.5rem 0;
+  padding: 0.125rem 0;
+  border-top: $overline-height solid transparent;
+  border-bottom: $overline-height solid transparent;
+
+  @media (min-width: $breakpoint-sm) {
+    padding: 0.5rem 0 1rem;
+  }
 
   &::before {
     content: "";
     position: absolute;
-    top: -$overline-height;
     left: 0;
     height: $overline-height;
     width: 0;
@@ -118,6 +125,21 @@ $overline-height: 0.25rem;
     transition: 0.3s ease all;
   }
 }
+.over .overline {
+  border-bottom-color: transparent !important;
+
+  &::before {
+    top: -$overline-height;
+  }
+}
+
+.under .overline {
+  border-top-color: transparent !important;
+
+  &::before {
+    bottom: -$overline-height;
+  }
+}
 
 .reset-section {
   flex-grow: 1;
@@ -128,11 +150,8 @@ $overline-height: 0.25rem;
 }
 
 .btn-reset {
-  padding: 0.25rem 0 1.25rem;
-  border-top: $overline-height solid transparent;
-
   button {
-    padding: 0.25rem;
+    padding: 0;
     padding-left: 0.5rem;
     border: 0;
     border-left: 1px solid white;
