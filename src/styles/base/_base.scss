@@ -1,0 +1,13 @@
+html,
+body {
+  @extend %base-typography;
+  margin: 0;
+  padding: 0;
+  background-color: #555;
+  color: #ddd;
+  font-size: $font-size-base;
+}
+
+.hidden {
+  display: none !important;
+}
