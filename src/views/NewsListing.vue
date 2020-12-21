@@ -1,11 +1,13 @@
 <template>
   <div class="section">
-    <div class="container">
-      <div class="filters">
+    <div class="page-header">
+      <div class="container">
         <h1>Filter</h1>
         <toggle-group :tags="uniqueTags" v-model="selectedTags" />
+        <hr />
       </div>
-      <hr class="divider" />
+    </div>
+    <div class="container">
       <div v-if="!isLoaded">
         <div>Loading news articles...</div>
       </div>
@@ -113,21 +115,30 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.page-header {
+  position: sticky;
+  top: 0;
+  margin-top: -2rem;
+  padding: 2rem 0 1rem;
+  background-color: #555;
+  z-index: 1;
+}
+
 h1 {
   margin-bottom: 1rem;
   color: #fff;
   font-size: $font-size-md;
 }
-a:link {
-  text-decoration: none;
-}
 
-.divider {
-  margin: -0.125rem 0 2rem;
+hr {
   border: 0;
 
   @media (min-width: $breakpoint-sm) {
     border: 1px solid;
   }
+}
+
+a:link {
+  text-decoration: none;
 }
 </style>
