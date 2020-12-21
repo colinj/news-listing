@@ -2,21 +2,16 @@
   <div class="section">
     <div class="container">
       <div class="filters">
-        <span v-for="tag in uniqueTags" :key="tag">
-          {{ tag }}
-        </span>
+        <toggle-group :tags="uniqueTags" v-model="selectedTags" />
       </div>
+      {{ selectedTags }}
       <div v-if="!isLoaded">
         <div>Loading news articles...</div>
       </div>
       <div v-else class="news-layout">
-        <div
-          v-for="(article, index) in articles"
-          :key="article.id"
-          class="news-item"
-        >
+        <div v-for="article in articles" :key="article.id" class="news-item">
           <a :href="article.URL" target="_blank">
-            {{ index }} - {{ article.ArticleTitle }}
+            {{ article.id }} - {{ article.ArticleTitle }}
           </a>
         </div>
       </div>
@@ -26,9 +21,13 @@
 
 <script>
 import { getNewsArticles } from "@/api"
+import ToggleGroup from "@/components/ToggleGroup.vue"
 
 export default {
   name: "NewsListing",
+  components: {
+    ToggleGroup
+  },
   data() {
     return {
       isLoaded: false,
@@ -60,10 +59,5 @@ a:link {
 .filters {
   border-bottom: 1px solid white;
   margin-bottom: 1rem;
-
-  span {
-    display: inline-block;
-    padding: 0.5rem;
-  }
 }
 </style>
