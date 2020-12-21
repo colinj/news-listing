@@ -78,7 +78,7 @@
     }
   }
 
-  @media (min-width: $breakpoint) {
+  @media (min-width: $breakpoint-sm) {
     &__content {
       padding: 3rem;
     }
