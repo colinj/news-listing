@@ -1,3 +1,5 @@
+$img-width: 67.25%;
+
 .card {
   display: flex;
   flex-direction: column;
@@ -7,12 +9,12 @@
   transition: background-color .3s linear;
 
   h2 {
-    font-size: $font-size-xl;
+    font-size: $font-size-md;
+    @include multi-line-ellipsis($lineCount: 2);
   }
 
   p {
     @include multi-line-ellipsis($lineCount: 3);
-    margin-top: 1.5rem;
   }
 
   &__image {
@@ -35,8 +37,14 @@
     flex: 1 1 50%;
     display: flex;
     flex-direction: column;
+    min-height: 50%;
+    max-height: 50%;
     padding: 1.5rem;
     font-size: $font-size-xs;
+
+    * + * {
+      margin-top: 1rem;
+    }
   }
 
   &__header {
@@ -44,19 +52,18 @@
   }
 
   &__body {
-    flex: 1 1;
-    margin-top: 1.5rem;
-    font-size: $font-size-md;
+    flex-grow: 1;
+    font-size: $font-size-sm;
   }
 
   &__footer {
-    margin-top: 1.5rem;
     text-transform: uppercase;
   }
 
   &:hover {
     background-color: #ccc;
 
+    h2::after,
     p::after {
       background-color: #ccc;
     }
@@ -66,37 +73,85 @@
     }
   }
 
-  &-tight {
-    .card__content {
-      padding: 1.5rem;
-    }
-    .card__body {
-      font-size: $font-size-sm;
-    }
-    h2 {
-      font-size: $font-size-md;
-    }
-  }
-
   @media (min-width: $breakpoint-sm) {
-    &__content {
-      padding: 3rem;
-    }
-
     &-right,
     &-left {
       flex-direction: row;
 
       .card__image {
-        flex: 1 0 67.25%;
+        flex: 1 0 $img-width;
         max-height: 100%;
         height: 100%;
+      }
+
+      .card__content {
+        flex: 1 1 (100% - $img-width);
+        max-height: 100%;
       }
     }
 
     &-right {
       .card__image {
         order: 1;
+      }
+    }
+  }
+
+  &-large {
+    @media (min-width: $breakpoint-sm) {
+      h2 {
+        max-height: none;
+        font-size: $font-size-lg;
+        text-align: left;
+      }
+
+      .card__content {
+        padding: 2rem;
+
+        * + * {
+          margin-top: 1.5rem;
+        }
+      }
+
+      .card__body {
+        font-size: $font-size-sm;
+      }
+
+      p {
+        max-height: none;
+        text-align: left;
+      }
+    }
+
+    @media (min-width: $breakpoint-md) {
+      h2 {
+        font-size: $font-size-xl;
+      }
+
+      .card__content {
+        padding: 3rem;
+
+        * + * {
+          margin-top: 1.5rem;
+        }
+      }
+
+      .card__body {
+        font-size: $font-size-md;
+      }
+    }
+
+    :not(&) {
+      > .card__image {
+        transition: .5s ease-in-out;
+
+        @media (max-width: $breakpoint-md) {
+          flex: 1 1 50%;
+        }
+      }
+
+      > .card__content {
+        flex: 1 1 50%;
       }
     }
   }

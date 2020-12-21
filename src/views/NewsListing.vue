@@ -4,7 +4,6 @@
       <div class="filters">
         <toggle-group :tags="uniqueTags" v-model="selectedTags" />
       </div>
-      {{ selectedTags }}
       <div v-if="!isLoaded">
         <div>Loading news articles...</div>
       </div>
@@ -16,13 +15,13 @@
         >
           <a :href="article.URL" target="_blank">
             <article-card
-              :class="{ 'card-tight': [1, 2].includes(index % 4) }"
+              :class="{ 'card-large': [0, 3].includes(index % 4) }"
               :image="article.ThumbnailImage"
               :alt-text="article.ArticleTitle"
               :layout="chooseLayout(index)"
             >
               <template v-slot:header>{{ article.Subject }}</template>
-              <h2>{{ article.ArticleTitle }}</h2>
+              <h2 :title="article.ArticleTitle">{{ article.ArticleTitle }}</h2>
               <p>{{ article.ShortDescription }}</p>
               <template v-slot:footer>
                 {{ formatDate(article.Date) }}
@@ -43,7 +42,7 @@ import ToggleGroup from "@/components/ToggleGroup"
 import ArticleCard from "@/components/ArticleCard"
 
 const intersect = (arrayA, arrayB) => arrayA.filter(x => arrayB.includes(x))
-const dateFormatter = new Intl.DateTimeFormat("en-AU", { dateStyle: "long" })
+const dateFormatter = new Intl.DateTimeFormat("en-AU", { dateStyle: "medium" })
 
 export default {
   name: "NewsListing",
