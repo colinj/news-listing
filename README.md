@@ -1,5 +1,7 @@
 # News Listing Demo Application
 
+[A live demo of this application can be launched from here](https://gifted-meitner-01130b.netlify.app/).
+
 This web applications displays news articles in a structured list so site users can easily view and consume news content. This application pulls the latest articles into a visually engaging layout.
 
 The latest news articles are provided through a mock API.
