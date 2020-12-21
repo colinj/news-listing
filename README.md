@@ -2,7 +2,7 @@
 
 [A live demo of this application can be launched from here](https://gifted-meitner-01130b.netlify.app/).
 
-This web applications displays news articles in a structured list so site users can easily view and consume news content. This application pulls the latest articles into a visually engaging layout.
+This web application displays news articles in a structured list so site users can easily view and consume news content. The application pulls the latest articles into a visually engaging layout.
 
 The latest news articles are provided through a mock API.
 
@@ -14,7 +14,7 @@ The entire card is a link to the actual article. When the user hovers over the c
 
 When the user clicks on the article card, the user will be taken to the article page.
 
-Users can also filter articles by topic which are automatically displayed at the top of the page.
+Users can also filter articles by topic. Filter tags are generated from the list and are automatically displayed at the top of the page.
 
 When the user hovers over a filter tag:
 * The text changes to a lighter shade.
