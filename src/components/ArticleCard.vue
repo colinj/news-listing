@@ -1,7 +1,7 @@
 <template>
   <div class="card" :class="layoutClass">
-    <figure class="card__image">
-      <img :src="image" :alt="altText" />
+    <figure v-lazyload class="card__image">
+      <img :data-src="image" :alt="altText" />
     </figure>
     <div class="card__content">
       <div class="card__header">
