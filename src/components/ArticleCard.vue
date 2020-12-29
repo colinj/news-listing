@@ -1,8 +1,8 @@
 <template>
   <div class="card" :class="layoutClass">
-    <div class="card__image">
+    <figure class="card__image">
       <img :src="image" :alt="altText" />
-    </div>
+    </figure>
     <div class="card__content">
       <div class="card__header">
         <slot name="header" />
