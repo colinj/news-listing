@@ -84,10 +84,10 @@ $overline-height: 0.125rem;
       border-bottom-color: $checked-color;
       color: $checked-color;
 
-      @media (min-width: $breakpoint-sm) {
-        border-top-color: $checked-color;
-        border-bottom-color: transparent;
-      }
+      // @media (min-width: $breakpoint-sm) {
+      //   border-top-color: $checked-color;
+      //   border-bottom-color: transparent;
+      // }
 
       &::before {
         z-index: -1;
@@ -95,7 +95,8 @@ $overline-height: 0.125rem;
     }
 
     &:focus-visible + label {
-      background-color: red;
+      outline: 2px solid white;
+      outline-offset: 4px;
     }
   }
   &:nth-last-of-type(2) {
@@ -121,14 +122,14 @@ $overline-height: 0.125rem;
     transition: 0.15s ease all;
   }
 
-  @media (min-width: $breakpoint-sm) {
-    padding: 0.5rem 0 1rem;
+  // @media (min-width: $breakpoint-sm) {
+  //   padding: 0.5rem 0 1rem;
 
-    &::before {
-      top: -$overline-height;
-      bottom: auto;
-    }
-  }
+  //   &::before {
+  //     top: -$overline-height;
+  //     bottom: auto;
+  //   }
+  // }
 
   &:hover::before {
     width: 100%;
@@ -158,7 +159,8 @@ $overline-height: 0.125rem;
     }
 
     &:focus-visible {
-      background: red;
+      outline: 2px solid white;
+      outline-offset: 4px;
     }
 
     &:hover {
