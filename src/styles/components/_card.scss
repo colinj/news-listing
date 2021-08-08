@@ -14,7 +14,7 @@ $img-width: 67.25%;
   }
 
   p {
-    @include multi-line-ellipsis($lineCount: 3);
+    @include multi-line-ellipsis($lineCount: 4);
   }
 
   &__image {
